@@ -5,6 +5,28 @@ const twitterBtn = document.getElementById("twitter");
 const newQuoteBtn = document.getElementById("new-quote");
 const loader = document.getElementById("loader");
 
+/* ParticleJS */
+  window.onload = function(){
+    Particles.init({
+      // normal options
+      selector: '.background',
+      maxParticles: 250,
+      color: '#38a1f3',
+      connectParticles: 'true',
+      // options for breakpoints
+      responsive: [
+        {
+          breakpoint: 1000,
+          options: {
+            maxParticles: 50,
+            color: '#38a1f3',
+            connectParticles: true
+          }
+        }
+      ]
+    });
+  }
+
 // Show Loading
 function loading(){
     loader.hidden = false;
@@ -31,7 +53,7 @@ async function getQuote(){
         if(data.quoteAuthor === ""){
             authorText.innerText = "Unknown"
         }else {
-            authorText.innerText = data.quoteAuthor;
+            authorText.innerText ="- " + data.quoteAuthor + " -";
         } 
         // Reduce font size for long quotes
         if(data.quoteText.length > 120){
@@ -44,7 +66,6 @@ async function getQuote(){
         complete();
     } catch (error) {
         getQuote();
-        console.log("Whoops, no quote", error);
     }
 }
 // Tweet Quote
